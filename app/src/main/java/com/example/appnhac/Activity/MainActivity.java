@@ -28,13 +28,13 @@ public class MainActivity extends AppCompatActivity {
         MainViewPagerAdapter mainViewPagerAdapter = new MainViewPagerAdapter(getSupportFragmentManager());
         mainViewPagerAdapter.addFragment(new Fragment_Trang_Chu(), "Home");
         mainViewPagerAdapter.addFragment(new Fragment_Tim_Kiem(),"Search");
-        mainViewPagerAdapter.addFragment(new Fragment_Offline(),"My Music");
+        /*mainViewPagerAdapter.addFragment(new Fragment_Offline(),"My Music");*/
 
         viewPager.setAdapter(mainViewPagerAdapter);
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.getTabAt(0).setIcon(R.drawable.iconhomenew);
         tabLayout.getTabAt(1).setIcon(R.drawable.iconsearchnew);
-        tabLayout.getTabAt(2).setIcon(R.drawable.iconmymusic);
+        /*tabLayout.getTabAt(2).setIcon(R.drawable.iconmymusic);*/
 
     }
     private void anhxa()

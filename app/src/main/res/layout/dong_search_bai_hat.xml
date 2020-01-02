@@ -12,7 +12,7 @@
 
     <TextView
         android:id="@+id/textviewsearchtenbaihat"
-        android:textSize="15sp"
+        android:textSize="18sp"
         android:textColor="#0a0a0a"
         android:text="Ten bai hat"
         android:layout_toRightOf="@id/imageSearchbaihat"
@@ -28,7 +28,7 @@
     <TextView
         android:layout_below="@id/textviewsearchtenbaihat"
         android:id="@+id/textviewsearchtencasi"
-        android:textSize="15sp"
+        android:textSize="18sp"
         android:textColor="#6e6d6d"
         android:text="Ten Ca Si"
         android:layout_toRightOf="@id/imageSearchbaihat"
@@ -42,10 +42,23 @@
 
     <ImageView
         android:layout_marginRight="10dp"
-        android:layout_centerVertical="true"
+
         android:layout_alignParentRight="true"
-        android:src="@drawable/iconlove"
-        android:id="@+id/imageviewSearchluotthich"
-        android:layout_width="30dp"
-        android:layout_height="30dp"/>
+        android:src="@drawable/iconrating"
+        android:id="@+id/imageviewSearchrating"
+        android:layout_width="25dp"
+        android:layout_height="25dp"/>
+    <TextView
+        android:textColor="#8c8a8a"
+        android:textSize="18sp"
+        android:text="Rating"
+        android:ellipsize="none"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="12dp"
+        android:layout_below="@id/imageviewSearchrating"
+        android:id="@+id/textviewratingsearchbaihat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true" />
 </RelativeLayout>

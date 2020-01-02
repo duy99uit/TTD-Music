@@ -48,6 +48,7 @@ public class DanhsachbaihatAdapter extends RecyclerView.Adapter<DanhsachbaihatAd
         Baihat baihat=mangbaihat.get(position);
         holder.txtcasi.setText(baihat.getCasi());
         holder.txttenbaihat.setText(baihat.getTenbaihat());
+        holder.txtrating.setText(baihat.getLuotthich());
         holder.txtindex.setText(position+1+"");
     }
 
@@ -58,18 +59,19 @@ public class DanhsachbaihatAdapter extends RecyclerView.Adapter<DanhsachbaihatAd
 
     public  class  ViewHolder extends RecyclerView.ViewHolder{
 
-        TextView txtindex, txttenbaihat, txtcasi;
-        ImageView imgluothich;
+        TextView txtindex, txttenbaihat, txtcasi,txtrating;
+        ImageView imgrating;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             //anhxa
             txtcasi=itemView.findViewById(R.id.textviewtencasi);
             txtindex=itemView.findViewById(R.id.textviewdanhsachindex);
             txttenbaihat=itemView.findViewById(R.id.textviewtenbaihat);
-            imgluothich=itemView.findViewById(R.id.imageviewluotthichdanhsachbaihat);
+            imgrating=itemView.findViewById(R.id.imageviewratingdanhsachbaihat);
+            txtrating=itemView.findViewById(R.id.textviewratingdanhsachbaihat);
 
 
-            imgluothich.setOnClickListener(new View.OnClickListener() {
+           /* imgluothich.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //Toast.makeText(context,baihatArrayList.get(getPosition()).getTenbaihat(), Toast.LENGTH_SHORT).show();
@@ -95,13 +97,35 @@ public class DanhsachbaihatAdapter extends RecyclerView.Adapter<DanhsachbaihatAd
                     });
                     imgluothich.setEnabled(false);
                 }
-            });
+            });*/
             //bat su kien cho item trong albumhot den activityPlaynhac
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent=new Intent(context, PlayNhacActivity.class);
                     intent.putExtra("cakhuc",mangbaihat.get(getPosition()));
+
+                    //add rating cho item
+                    Dataservice dataservice= APIService.getService();
+                    Call<String> callback=dataservice.UpdateLuotThich("1",mangbaihat.get(getPosition()).getIdbaihat());
+                    callback.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            String ketqua=response.body();
+                            if(ketqua.equals("OK")){
+                                Toast.makeText(context, "Rating ++", Toast.LENGTH_SHORT).show();
+                            }else {
+                                Toast.makeText(context, "Loi", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+
+                        }
+                    });
+                    imgrating.setEnabled(false);
+
                     context.startActivity(intent);
                 }
             });

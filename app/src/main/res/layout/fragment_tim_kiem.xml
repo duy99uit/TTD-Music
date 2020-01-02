@@ -3,7 +3,8 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <com.google.android.material.appbar.AppBarLayout
-    android:background="#3e3ee2"
+
+        android:background="#BBBBC9"
     android:id="@+id/appbarlayoutsearchbaihat"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
@@ -27,7 +28,7 @@
         android:visibility="gone"
         android:textSize="35sp"
         android:gravity="center"
-        android:text="Khong co du lieu"
+        android:text="No Result"
         android:id="@+id/textviewkhongcodulieu"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>

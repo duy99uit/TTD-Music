@@ -48,6 +48,7 @@ public class BaihathotAdapter extends RecyclerView.Adapter<BaihathotAdapter.View
         holder.txtcasi.setText(baihat.getCasi());
         holder.txtten.setText(baihat.getTenbaihat());
         Picasso.with(context).load(baihat.getHinhbaihat()).into(holder.imghinh);
+        holder.txtrating.setText(baihat.getLuotthich());
     }
 
     @Override
@@ -58,13 +59,14 @@ public class BaihathotAdapter extends RecyclerView.Adapter<BaihathotAdapter.View
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView txtten,txtcasi;
         ImageView imghinh,imgluotthich;
+        TextView txtrating;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtten=itemView.findViewById(R.id.textviewtenbaihathot);
             txtcasi=itemView.findViewById(R.id.textviewcasibaihathot);
             imghinh=itemView.findViewById(R.id.imageviewbaihathot);
             imgluotthich=itemView.findViewById(R.id.imageviewluotthich);
-
+            txtrating=itemView.findViewById(R.id.textviewrating);
             ///bat su kien khi chon 5 bai hat hot chuyen den ActivityPlayNhac
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -72,11 +74,31 @@ public class BaihathotAdapter extends RecyclerView.Adapter<BaihathotAdapter.View
                 public void onClick(View v) {
                     Intent intent=new Intent(context, PlayNhacActivity.class);
                     intent.putExtra("cakhuc",baihatArrayList.get(getPosition()));
+
+
+                    Dataservice dataservice=APIService.getService();
+                    Call<String> callback=dataservice.UpdateLuotThich("1",baihatArrayList.get(getPosition()).getIdbaihat());
+                    callback.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            String ketqua=response.body();
+                            if(ketqua.equals("OK")){
+                                Toast.makeText(context, "Rating ++", Toast.LENGTH_SHORT).show();
+                            }else {
+                                Toast.makeText(context, "Loi", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+
+                        }
+                    });
                     context.startActivity(intent);
                 }
             });
 
-            imgluotthich.setOnClickListener(new View.OnClickListener() {
+           /* imgluotthich.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //Toast.makeText(context,baihatArrayList.get(getPosition()).getTenbaihat(), Toast.LENGTH_SHORT).show();
@@ -102,7 +124,7 @@ public class BaihathotAdapter extends RecyclerView.Adapter<BaihathotAdapter.View
                     });
                     imgluotthich.setEnabled(false);
                 }
-            });
+            });*/
         }
     }
 }

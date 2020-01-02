@@ -50,6 +50,7 @@ public class SearchBaiHatAdapter extends RecyclerView.Adapter<SearchBaiHatAdapte
         holder.txtTenbaihat.setText(baihat.getTenbaihat());
         holder.txtCasi.setText(baihat.getCasi());
         Picasso.with(context).load(baihat.getHinhbaihat()).into(holder.imgbaihat);
+        holder.txtrating.setText(baihat.getLuotthich());
     }
 
     @Override
@@ -58,27 +59,51 @@ public class SearchBaiHatAdapter extends RecyclerView.Adapter<SearchBaiHatAdapte
     }
 
     public  class ViewHolder extends RecyclerView.ViewHolder{
-        TextView txtTenbaihat,txtCasi;
-        ImageView imgbaihat,imgluotthich;
+        TextView txtTenbaihat,txtCasi,txtrating;
+        ImageView imgbaihat,imgrating;
         public ViewHolder(@NonNull View itemView) {
 
             super(itemView);
             txtTenbaihat=itemView.findViewById(R.id.textviewsearchtenbaihat);
             txtCasi=itemView.findViewById(R.id.textviewsearchtencasi);
+            txtrating=itemView.findViewById(R.id.textviewratingsearchbaihat);
             imgbaihat=itemView.findViewById(R.id.imageSearchbaihat);
-            imgluotthich=itemView.findViewById(R.id.imageviewSearchluotthich);
+            imgrating=itemView.findViewById(R.id.imageviewSearchrating);
 
             // bat su kien khi click o man hinh tim kiem
             //bai hat se dc phat
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(context, PlayNhacActivity.class); // chuyen man hinh sang PlayNahc
+                    Toast.makeText(context, "Da Click", Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(context, PlayNhacActivity.class);
                     intent.putExtra("cakhuc",mangbaihat.get(getPosition()));
+
+                    //
+                    Dataservice dataservice= APIService.getService();
+                    Call<String> callback=dataservice.UpdateLuotThich("1",mangbaihat.get(getPosition()).getIdbaihat());
+                    callback.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            String ketqua=response.body();
+                            if(ketqua.equals("OK")){
+                                Toast.makeText(context, "Rating ++", Toast.LENGTH_SHORT).show();
+                            }else{
+                                Toast.makeText(context, "Lỗi", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+
+                        }
+                    });
+                    imgrating.setEnabled(false);
+
                     context.startActivity(intent);
                 }
             });
-            imgluotthich.setOnClickListener(new View.OnClickListener() {
+            /*imgluotthich.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     imgluotthich.setImageResource(R.drawable.iconloved);
@@ -103,7 +128,7 @@ public class SearchBaiHatAdapter extends RecyclerView.Adapter<SearchBaiHatAdapte
                     });
                     imgluotthich.setEnabled(false);
                 }
-            });
+            });*/
         }
     }
 }

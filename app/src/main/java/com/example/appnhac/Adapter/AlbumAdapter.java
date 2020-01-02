@@ -39,7 +39,7 @@ public class AlbumAdapter extends  RecyclerView.Adapter<AlbumAdapter.ViewHolder>
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        Album album =mangalbum.get(position);
+        Album album = mangalbum.get(position);
         holder.txtcasialbum.setText(album.getTenCaSiAlbum());
         holder.txttenalbum.setText(album.getTenAlbum());
         Picasso.with(context).load(album.getHinhAlbum()).into(holder.imghinhalbum);
