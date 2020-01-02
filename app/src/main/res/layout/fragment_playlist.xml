@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:padding="7dp">
+    <TextView
+        android:textColor="#000000"
+        android:textSize="15sp"
+        android:gravity="left"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="15dp"
+        android:id="@+id/textviewtitleplaylist"
+        android:text="TOP 100 BÀI HÁT NỔI BẬT"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <ListView
+        android:layout_below="@id/textviewtitleplaylist"
+        android:id="@+id/listviewplaylist"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </ListView>
+    <TextView
+        android:layout_marginTop="15dp"
+        android:id="@+id/textviewviewmoreplaylist"
+        android:textColor="#913677"
+        android:textSize="12sp"
+        android:layout_alignParentRight="true"
+        android:text="View more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+</RelativeLayout>
