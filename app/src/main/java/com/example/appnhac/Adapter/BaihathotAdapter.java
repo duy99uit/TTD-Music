@@ -83,9 +83,8 @@ public class BaihathotAdapter extends RecyclerView.Adapter<BaihathotAdapter.View
                         public void onResponse(Call<String> call, Response<String> response) {
                             String ketqua=response.body();
                             if(ketqua.equals("OK")){
-                                Toast.makeText(context, "Rating ++", Toast.LENGTH_SHORT).show();
                             }else {
-                                Toast.makeText(context, "Loi", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Fail", Toast.LENGTH_SHORT).show();
                             }
                         }
 

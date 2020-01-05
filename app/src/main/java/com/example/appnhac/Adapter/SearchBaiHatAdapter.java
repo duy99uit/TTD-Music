@@ -87,9 +87,8 @@ public class SearchBaiHatAdapter extends RecyclerView.Adapter<SearchBaiHatAdapte
                         public void onResponse(Call<String> call, Response<String> response) {
                             String ketqua=response.body();
                             if(ketqua.equals("OK")){
-                                Toast.makeText(context, "Rating ++", Toast.LENGTH_SHORT).show();
                             }else{
-                                Toast.makeText(context, "Lỗi", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "Fail", Toast.LENGTH_SHORT).show();
                             }
                         }
 
